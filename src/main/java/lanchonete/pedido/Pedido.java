@@ -15,7 +15,7 @@ public class Pedido {
     @Id
     private String id;
     private String name;
-    private Double price;
+    private Number price;
     @OneToMany
     private List<Lanche> lanches;
 

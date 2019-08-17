@@ -42,12 +42,19 @@ public class PedidoService {
                 }
             }
         }
-
-
         pedido.setLanches(lancheAux);
-    pedidoRepository.save(pedido);
+        double total = getAllPrice(lancheAux);
+        pedido.setPrice(total);
+        pedidoRepository.save(pedido);
    }
 
+    private double getAllPrice(List<Lanche> lanches) {
+       double total=0;
+       for(Lanche lanche: lanches) {
+           total = total + lanche.getPrice().doubleValue();
+       }
+       return total;
+    }
     public void updatePedido(Pedido pedido, String id) {
       pedidoRepository.save(pedido);
     }
