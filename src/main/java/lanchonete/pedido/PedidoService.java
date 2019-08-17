@@ -1,10 +1,11 @@
 package lanchonete.pedido;
 
+import lanchonete.lanche.Lanche;
+import lanchonete.lanche.LancheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -13,12 +14,8 @@ public class PedidoService {
     @Autowired
     private PedidoRepository pedidoRepository;
 
-
-   private List<Pedido> lanches = new ArrayList<>(Arrays.asList(
-           new Pedido("1","X-tudo",10),
-           new Pedido("2","X-calabresa",8),
-           new Pedido("3","X-salada",5)
-   ));
+    @Autowired
+    private LancheRepository lancheRepository;
 
    public List<Pedido> getAllPedido() {
         List<Pedido> pedido = new ArrayList<>();
@@ -32,6 +29,22 @@ public class PedidoService {
    }
 
    public void addPedido(Pedido pedido) {
+       List<Lanche> allLanches = new ArrayList<>();
+       lancheRepository.findAll().forEach(allLanches::add);
+
+    List<Lanche> lanche = pedido.getLanches();
+    List<Lanche> lancheAux = new ArrayList<>();
+
+        for(Lanche lanche1 : lanche){
+            for(Lanche lanche2: allLanches){
+                if(lanche1.getId().equalsIgnoreCase(lanche2.getId())){
+                    lancheAux.add(lanche2);
+                }
+            }
+        }
+
+
+        pedido.setLanches(lancheAux);
     pedidoRepository.save(pedido);
    }
 

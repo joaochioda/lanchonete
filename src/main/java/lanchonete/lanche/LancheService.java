@@ -4,21 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
-public class LanchoneteService {
+public class LancheService {
 
     @Autowired
     private LancheRepository lancheRepository;
 
+    private static Map<String, Lanche> lancheRep = new HashMap<>();
 
-   public List<Lanche> getAllLanches(String pedidoId) {
+
+   public List<Lanche> getAllLanches() {
         List<Lanche> lanche = new ArrayList<>();
-       lancheRepository.findByPedidoId(pedidoId)
+       lancheRepository.findAll()
        .forEach(lanche::add);
        return lanche;
    }
+
+
 
    public Lanche getLanche(String id) {
        return lancheRepository.findById(id).orElse(null);
