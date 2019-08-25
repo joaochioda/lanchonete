@@ -1,5 +1,6 @@
 package lanchonete.service;
 
+import lanchonete.model.Ingredientes;
 import lanchonete.model.Lanche;
 import lanchonete.repository.LancheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class LancheService {
 
     @Autowired
     private LancheRepository lancheRepository;
+    @Autowired
+    private IngredientesService ingredientesService;
 
    public List<Lanche> getAllLanches() {
         List<Lanche> lanche = new ArrayList<>();
@@ -27,7 +31,24 @@ public class LancheService {
    }
 
    public void addLanche(Lanche lanche) {
-    lancheRepository.save(lanche);
+       Optional<List<Ingredientes>> ingredientes = Optional.ofNullable(lanche.getIngredientes());
+
+       if(ingredientes.isPresent()){
+           Double price = 0.0;
+           Lanche lanche1 = new Lanche();
+           List<Ingredientes> ingredientes1 = lanche.getIngredientes();
+           for( Ingredientes ingredientes2 : ingredientes1) {
+               price +=ingredientesService.getIngredientesId(ingredientes2.getId()).getPrice();
+           }
+           lanche1.setName(lanche.getName());
+           lanche1.setPrice(price);
+           lanche1.setIngredientes(lanche.getIngredientes());
+           lancheRepository.save(lanche1);
+       } else {
+           lancheRepository.save(lanche);
+
+       }
+
    }
 
     public Object updateLanche(Lanche lanche, Long id) {

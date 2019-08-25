@@ -16,9 +16,9 @@ public class Ingredientes {
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "ped")
     private Long id;
     private String name;
-    private Number price;
+    private Double price;
 
-    public Ingredientes(Long id,String name, Number price) {
+    public Ingredientes(Long id,String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
