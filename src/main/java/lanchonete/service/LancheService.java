@@ -1,21 +1,19 @@
-package lanchonete.lanche;
+package lanchonete.service;
 
+import lanchonete.model.Lanche;
+import lanchonete.repository.LancheRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class LancheService {
 
     @Autowired
     private LancheRepository lancheRepository;
-
-    private static Map<String, Lanche> lancheRep = new HashMap<>();
-
 
    public List<Lanche> getAllLanches() {
         List<Lanche> lanche = new ArrayList<>();
@@ -24,9 +22,7 @@ public class LancheService {
        return lanche;
    }
 
-
-
-   public Lanche getLanche(String id) {
+   public Lanche getLancheId(Long id) {
        return lancheRepository.findById(id).orElse(null);
    }
 
@@ -34,11 +30,17 @@ public class LancheService {
     lancheRepository.save(lanche);
    }
 
-    public void updateLanche(Lanche lanche) {
-      lancheRepository.save(lanche);
+    public Object updateLanche(Lanche lanche, Long id) {
+        return lancheRepository.findById(id)
+                .map(ing ->{
+                    ing.setName(lanche.getName());
+                    ing.setPrice(lanche.getPrice());
+                    Lanche updated = lancheRepository.save(ing);
+                    return ResponseEntity.ok().body(updated);
+                }).orElse(null);
     }
 
-    public void deleteLanche(String id) {
+    public void deleteLanche(Long id) {
        lancheRepository.deleteById(id);
     }
 }

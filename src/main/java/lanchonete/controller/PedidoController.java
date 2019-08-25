@@ -1,5 +1,7 @@
-package lanchonete.pedido;
+package lanchonete.controller;
 
+import lanchonete.model.Pedido;
+import lanchonete.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

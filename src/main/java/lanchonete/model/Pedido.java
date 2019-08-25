@@ -1,6 +1,5 @@
-package lanchonete.pedido;
+package lanchonete.model;
 
-import lanchonete.lanche.Lanche;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -10,6 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
+
 public class Pedido {
 
     @Id
