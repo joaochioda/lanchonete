@@ -30,23 +30,23 @@ public class LancheService {
        return lancheRepository.findById(id).orElse(null);
    }
 
-   public void addLanche(Lanche lanche) {
+   public Lanche addLanche(Lanche lanche) {
        Optional<List<Ingredientes>> ingredientes = Optional.ofNullable(lanche.getIngredientes());
 
        if(ingredientes.isPresent()){
            Double price = 0.0;
            Lanche lanche1 = new Lanche();
-           List<Ingredientes> ingredientes1 = lanche.getIngredientes();
-           for( Ingredientes ingredientes2 : ingredientes1) {
+           for( Ingredientes ingredientes2 : ingredientes.get()) {
                price +=ingredientesService.getIngredientesId(ingredientes2.getId()).getPrice();
            }
            lanche1.setName(lanche.getName());
            lanche1.setPrice(price);
            lanche1.setIngredientes(lanche.getIngredientes());
            lancheRepository.save(lanche1);
+           return lanche1;
        } else {
            lancheRepository.save(lanche);
-
+           return lanche;
        }
 
    }

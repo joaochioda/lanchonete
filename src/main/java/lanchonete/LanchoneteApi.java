@@ -1,7 +1,6 @@
 package lanchonete;
 
 import lanchonete.model.Ingredientes;
-import lanchonete.model.Lanche;
 import lanchonete.repository.IngredientesRepository;
 import lanchonete.repository.LancheRepository;
 import lanchonete.service.IngredientesService;
@@ -39,10 +38,10 @@ public class LanchoneteApi {
 
 
 
-            lancheRepo.save(Lanche.builder().id((long) 1.0).name("xBacon").price(19.90).ingredientes(getListXbacon()).build());
-            lancheRepo.save(Lanche.builder().id((long) 2.0).name("xBurguer").price(19.90).ingredientes(getListXburguer()).build());
-            lancheRepo.save(Lanche.builder().id((long) 3.0).name("xEgg").price(19.90).ingredientes(getListXegg()).build());
-            lancheRepo.save(Lanche.builder().id((long) 4.0).name("xEggBacon").price(19.90).ingredientes(getListXeggBacon()).build());
+            //lancheRepo.save(Lanche.builder().id((long) 1.0).name("xBacon").ingredientes(getListXbacon()).build());
+            //lancheRepo.save(Lanche.builder().id((long) 2.0).name("xBurguer").ingredientes(getListXburguer()).build());
+            //lancheRepo.save(Lanche.builder().id((long) 3.0).name("xEgg").ingredientes(getListXegg()).build());
+            //lancheRepo.save(Lanche.builder().id((long) 4.0).name("xEggBacon").ingredientes(getListXeggBacon()).build());
 
         }
 

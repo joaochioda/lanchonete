@@ -18,11 +18,11 @@ public class Lanche {
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "tab")
     private Long id;
     private String name;
-    private Number price;
+    private Double price;
     @ManyToMany
     private List<Ingredientes> ingredientes;
 
-    public Lanche(Long id, String name, Number price, List<Ingredientes> ingredientes) {
+    public Lanche(Long id, String name, Double price, List<Ingredientes> ingredientes) {
         this.id = id;
         this.name = name;
         this.price = price;

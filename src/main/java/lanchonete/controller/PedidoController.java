@@ -18,7 +18,7 @@ public class PedidoController {
     }
 
     @RequestMapping("/pedidos/{id}")
-    public Pedido getPedido(@PathVariable String id){
+    public Pedido getPedido(@PathVariable Long id){
         return pedidoService.getPedido(id);
     }
 
@@ -28,12 +28,12 @@ public class PedidoController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value="/pedidos/{id}")
-    public void updatePedido(@RequestBody Pedido pedido, @PathVariable String id) {
+    public void updatePedido(@RequestBody Pedido pedido, @PathVariable Long id) {
         pedidoService.updatePedido(pedido,id);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value="/pedidos/{id}")
-    public void deletePedido(@PathVariable String id) {
+    public void deletePedido(@PathVariable Long id) {
         pedidoService.deletePedido(id);
     }
 
